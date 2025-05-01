@@ -65,3 +65,77 @@ pretty_install <- function(...) {
   output <- grep("^(\\s*|[-|])$", output, value = TRUE, invert = TRUE)
   c(output, out$messages)
 }
+
+#' Conditionally Install Packages
+#'
+#' This function checks if a package is installed and installs it if not.
+#' It also provides options for installing from GitHub, R-Forge, or Bioconductor.
+#'
+#' @param package The name of the package to check and install.
+#' @param host The host from which to install the package. Options are "CRAN", "GitHub", "R-Forge", or "Bioconductor".
+#' @param repo The GitHub repository in the format "username/repo" (for GitHub installations).
+
+install_if_missing <- function(package, host = "CRAN") {
+    if (host == "GitHub") {
+      install_github_if_missing(repo=package)
+    } else if (host == "R-Forge") {
+      install_rforge_if_missing(package=package)
+    } else if (host == "Bioconductor") {
+      install_bioc_if_missing(package=package)
+    } else if (host == "CRAN") {
+      if (!require(package, character.only = TRUE)) {
+        # Check if the package is available on CRAN
+        if (!package %in% rownames(available.packages())) {
+          stop(paste("Package", package, "is not available on CRAN."))
+        }
+        # Install the package from CRAN
+      install.packages(package)
+    }
+  } else {
+    stop("Invalid host specified. Use 'CRAN', 'GitHub', 'R-Forge', or 'Bioconductor'.")
+  }
+}
+
+
+
+#' Install GitHub Package if Missing
+#'
+#' This function checks if a package is installed from GitHub and installs it if not.
+#' It uses the `devtools` package to install the package from a specified GitHub repository.
+#' @param repo The GitHub repository in the format "username/repo".
+#' @return NULL
+#' @importFrom devtools install_github
+
+install_github_if_missing <- function(repo) {
+  package <- unlist(strsplit(repo, "/"))[2]
+  if (!require(package, character.only = TRUE)) {
+    devtools::install_github(repo)
+  }
+}
+#' Install R-Forge Package if Missing
+#'
+#' This function checks if a package is installed from R-Forge and installs it if not.
+#' It uses the `install.packages` function to install the package from the specified R-Forge repository.
+#' @param package The name of the package to check and install.
+#' @param repo The R-Forge repository URL. Default is "http://R-Forge.R-project.org".
+#' @return NULL
+
+install_rforge_if_missing <- function(package, repo = "http://R-Forge.R-project.org") {
+  if (!require(package, character.only = TRUE)) {
+    install.packages(package, repos = repo)
+  }
+}
+
+#' Install Bioconductor Package if Missing
+#'
+#' This function checks if a package is installed from Bioconductor and installs it if not.
+#' It uses the `BiocManager` package to install the package from the specified Bioconductor repository.
+#' @param package The name of the package to check and install.
+#' @return NULL
+#' @importFrom BiocManager install
+
+install_bioc_if_missing <- function(package) {
+  if (!requireNamespace(package, quietly = TRUE)) {
+    BiocManager::install(package)
+  }
+}
