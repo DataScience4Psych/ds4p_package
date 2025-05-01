@@ -1,4 +1,3 @@
-
 #' Construct Slide URL
 #'
 #' Constructs a URL for slides from a dataframe based on the title and optional specific slide number.
@@ -30,7 +29,8 @@ slide_url <- function(df_url, title, slide = NULL) {
 #' @export
 try_include_tweet <- function(tweet_url, plain = FALSE, ...) {
   return(try(tweetrmd::include_tweet(tweet_url = tweet_url, plain = plain),
-             silent = TRUE))
+    silent = TRUE
+  ))
 }
 
 #' Embed YouTube Video Alternatively
@@ -49,10 +49,10 @@ embed_youtube_alt <- function(youtube_id) {
     return(knitr::include_url(url))
   } else {
     # Download thumbnail and use that
-    dir_path <- 'img/youtube'
+    dir_path <- "img/youtube"
     if (!dir.exists(dir_path)) dir.create(dir_path)
-    file_path <- stringr::str_c(dir_path, '/', youtube_id, '.jpg')
-    if (!file.exists(file_path)) webshot::webshot(stringr::str_c("https://img.youtube.com/vi/", youtube_id, "/mqdefault.jpg"), vwidth = 320, vheight=180, file = file_path)
+    file_path <- stringr::str_c(dir_path, "/", youtube_id, ".jpg")
+    if (!file.exists(file_path)) webshot::webshot(stringr::str_c("https://img.youtube.com/vi/", youtube_id, "/mqdefault.jpg"), vwidth = 320, vheight = 180, file = file_path)
     return(knitr::include_graphics(stringr::str_c(file_path)))
   }
 }

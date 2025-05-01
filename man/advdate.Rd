@@ -10,7 +10,7 @@ advdate(
   topic = NULL,
   assignment = NULL,
   unit = "Module ",
-  version = 1,
+  legacy = FALSE,
   ...
 )
 }
@@ -25,7 +25,7 @@ advdate(
 
 \item{unit}{The unit prefix for the week number. Default is "Module ".}
 
-\item{version}{The version of the function to use (0 or 1). Default is 1. Allows for older version to be used.}
+\item{legacy}{Logical indicating whether to use the older version of the function. Default is FALSE.}
 
 \item{...}{Additional arguments to be passed to the function.}
 }

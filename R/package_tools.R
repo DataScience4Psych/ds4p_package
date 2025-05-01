@@ -76,19 +76,19 @@ pretty_install <- function(...) {
 #' @param repo The GitHub repository in the format "username/repo" (for GitHub installations).
 
 install_if_missing <- function(package, host = "CRAN") {
-    if (host == "GitHub") {
-      install_github_if_missing(repo=package)
-    } else if (host == "R-Forge") {
-      install_rforge_if_missing(package=package)
-    } else if (host == "Bioconductor") {
-      install_bioc_if_missing(package=package)
-    } else if (host == "CRAN") {
-      if (!require(package, character.only = TRUE)) {
-        # Check if the package is available on CRAN
-        if (!package %in% rownames(available.packages())) {
-          stop(paste("Package", package, "is not available on CRAN."))
-        }
-        # Install the package from CRAN
+  if (host == "GitHub") {
+    install_github_if_missing(repo = package)
+  } else if (host == "R-Forge") {
+    install_rforge_if_missing(package = package)
+  } else if (host == "Bioconductor") {
+    install_bioc_if_missing(package = package)
+  } else if (host == "CRAN") {
+    if (!require(package, character.only = TRUE)) {
+      # Check if the package is available on CRAN
+      if (!package %in% rownames(available.packages())) {
+        stop(paste("Package", package, "is not available on CRAN."))
+      }
+      # Install the package from CRAN
       install.packages(package)
     }
   } else {
@@ -132,10 +132,10 @@ install_rforge_if_missing <- function(package, repo = "http://R-Forge.R-project.
 #' It uses the `BiocManager` package to install the package from the specified Bioconductor repository.
 #' @param package The name of the package to check and install.
 #' @return NULL
-#' @importFrom BiocManager install
+
 
 install_bioc_if_missing <- function(package) {
   if (!requireNamespace(package, quietly = TRUE)) {
-    BiocManager::install(package)
+    devtools::install(package)
   }
 }

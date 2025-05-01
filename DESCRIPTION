@@ -2,7 +2,7 @@ Package: DS4P
 Type: Package
 Title: Data Science for Psychologists
 Version: 0.1.0
-Authors@R:  person("S. Mason", "Garrison", email = "garrissm@wfu.edu",
+Authors@R: person("S. Mason", "Garrison", email = "garrissm@wfu.edu",
                   role = c("aut", "cre", "cph"),
                   comment = c(ORCID = "0000-0002-4804-6003"))
 Maintainer: S. Mason Garrison <garrissm@wfu.edu>
@@ -12,7 +12,7 @@ License: GPL-3 + file LICENSE
 Encoding: UTF-8
 BugReports: https://github.com/DataScience4Psych/package/issues
 LazyData: true
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
 Imports: 
     stringr,
     devtools,
