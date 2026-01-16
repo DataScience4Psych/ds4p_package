@@ -2,25 +2,35 @@
 % Please edit documentation in R/package_tools.R
 \name{check_quietly}
 \alias{check_quietly}
-\title{Quietly Check Packages}
+\title{Quietly check a package with devtools}
 \usage{
-check_quietly(...)
+check_quietly(..., quiet = TRUE)
 }
 \arguments{
-\item{...}{Arguments passed to purrr::quietly}
+\item{...}{Arguments forwarded to [devtools::check()].}
+
+\item{quiet}{Logical; if `TRUE`, suppress printed output (default `TRUE`).}
 }
 \value{
-A function that when executed will return a list containing elements `result`, `output`, `warnings`, and `messages`.
+A list with elements `result`, `output`, `warnings`, and `messages`
+  in the format returned by [purrr::quietly()].
 }
 \description{
-Creates a wrapper around `devtools::check()` to execute package checking quietly.
-This function captures and returns the output and errors without printing them directly to the console.
+A thin wrapper around [devtools::check()] executed via [purrr::quietly()].
+This captures output, warnings, and messages instead of printing them.
+}
+\details{
+This is primarily useful for instructors and package maintainers. If you ship
+this to students, keep in mind it requires the suggested packages `devtools`
+and `purrr`.
 }
 \examples{
 \dontrun{
-result <- check_quietly("myPackage")
+out <- check_quietly(pkg = ".")
+str(out)
 }
+
 }
 \seealso{
-`purrr::quietly()` for details on the structure of the returned list.
+[purrr::quietly()], [devtools::check()]
 }

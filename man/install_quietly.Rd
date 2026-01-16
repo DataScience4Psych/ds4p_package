@@ -4,23 +4,33 @@
 \alias{install_quietly}
 \title{Quietly Install Packages}
 \usage{
-install_quietly(...)
+install_quietly(..., quiet = TRUE)
 }
 \arguments{
-\item{...}{Arguments passed to purrr::quietly}
+\item{...}{Arguments forwarded to [devtools::install()].}
+
+\item{quiet}{Logical; if `TRUE`, suppress printed output (default `TRUE`).}
 }
 \value{
-A function that when executed will return a list containing elements `result`, `output`, `warnings`, and `messages`.
+A list with elements `result`, `output`, `warnings`, and `messages`
+  in the format returned by [purrr::quietly()].
 }
 \description{
-Creates a wrapper around `devtools::install()` to execute package installation quietly.
-This function captures and returns the output and errors without printing them directly to the console.
+A thin wrapper around [devtools::install()] executed via [purrr::quietly()].
+This captures output, warnings, and messages instead of printing them.
+}
+\details{
+This is primarily useful for instructors and package maintainers. If you ship
+this to students, keep in mind it requires the suggested packages `devtools`
+and `purrr`.
 }
 \examples{
 \dontrun{
-result <- install_quietly("myPackage")
+out <- install_quietly(pkg = ".")
+str(out)
 }
+
 }
 \seealso{
-`purrr::quietly()` for details on the structure of the returned list.
+[purrr::quietly()], [devtools::install()]
 }

@@ -1,37 +1,75 @@
-#' Quietly Check Packages
+#' Quietly check a package with devtools
 #'
-#' Creates a wrapper around `devtools::check()` to execute package checking quietly.
-#' This function captures and returns the output and errors without printing them directly to the console.
+#' A thin wrapper around [devtools::check()] executed via [purrr::quietly()].
+#' This captures output, warnings, and messages instead of printing them.
 #'
-#' @param ... Arguments passed to purrr::quietly
-#' @return A function that when executed will return a list containing elements `result`, `output`, `warnings`, and `messages`.
-#' @seealso `purrr::quietly()` for details on the structure of the returned list.
+#' This is primarily useful for instructors and package maintainers. If you ship
+#' this to students, keep in mind it requires the suggested packages `devtools`
+#' and `purrr`.
+#'
+#' @param ... Arguments forwarded to [devtools::check()].
+#' @param quiet Logical; if `TRUE`, suppress printed output (default `TRUE`).
+#'
+#' @return A list with elements `result`, `output`, `warnings`, and `messages`
+#'   in the format returned by [purrr::quietly()].
+#'
+#' @seealso [purrr::quietly()], [devtools::check()]
+#'
 #' @examples
 #' \dontrun{
-#' result <- check_quietly("myPackage")
+#' out <- check_quietly(pkg = ".")
+#' str(out)
 #' }
-#' @export
-#' @importFrom purrr quietly
-#' @importFrom devtools check install
 #'
+#' @export
 
+check_quietly <- function(..., quiet = TRUE) {
+  if (!requireNamespace("purrr", quietly = TRUE)) {
+    stop("Package 'purrr' is required for check_quietly(). Install it first.")
+  }
+  if (!requireNamespace("devtools", quietly = TRUE)) {
+    stop("Package 'devtools' is required for check_quietly(). Install it first.")
+  }
 
-check_quietly <- purrr::quietly(devtools::check)
+  f <- purrr::quietly(devtools::check, quiet = quiet)
+  f(...)
+}
 
 #' Quietly Install Packages
 #'
-#' Creates a wrapper around `devtools::install()` to execute package installation quietly.
-#' This function captures and returns the output and errors without printing them directly to the console.
-#' @param ... Arguments passed to purrr::quietly
-#' @return A function that when executed will return a list containing elements `result`, `output`, `warnings`, and `messages`.
-#' @seealso `purrr::quietly()` for details on the structure of the returned list.
+#' A thin wrapper around [devtools::install()] executed via [purrr::quietly()].
+#' This captures output, warnings, and messages instead of printing them.
+#'
+#' This is primarily useful for instructors and package maintainers. If you ship
+#' this to students, keep in mind it requires the suggested packages `devtools`
+#' and `purrr`.
+#'
+#' @param ... Arguments forwarded to [devtools::install()].
+#' @param quiet Logical; if `TRUE`, suppress printed output (default `TRUE`).
+#'
+#' @return A list with elements `result`, `output`, `warnings`, and `messages`
+#'   in the format returned by [purrr::quietly()].
+#'
+#' @seealso [purrr::quietly()], [devtools::install()]
+#'
 #' @examples
 #' \dontrun{
-#' result <- install_quietly("myPackage")
+#' out <- install_quietly(pkg = ".")
+#' str(out)
 #' }
+#'
 #' @export
-install_quietly <- purrr::quietly(devtools::install)
+install_quietly <- function(..., quiet = TRUE) {
+  if (!requireNamespace("purrr", quietly = TRUE)) {
+    stop("Package 'purrr' is required for install_quietly(). Install it first.")
+  }
+  if (!requireNamespace("devtools", quietly = TRUE)) {
+    stop("Package 'devtools' is required for install_quietly(). Install it first.")
+  }
 
+  f <- purrr::quietly(devtools::install, quiet = quiet)
+  f(...)
+}
 #' Check and Install Packages Quietly
 #'
 #' Executes the check or install commands quietly, using purrr's quietly wrapper.

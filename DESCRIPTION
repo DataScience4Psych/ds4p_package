@@ -12,7 +12,7 @@ License: GPL-3 + file LICENSE
 Encoding: UTF-8
 BugReports: https://github.com/DataScience4Psych/ds4p_package/issues
 LazyData: true
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Imports: 
     stringr,
     devtools,
