@@ -39,7 +39,7 @@ To install the development version of DS4P from [GitHub](https://github.com/) us
 
 ```r
 # install.packages("devtools")
-devtools::install_github("DataScience4Psych/package")
+devtools::install_github("DataScience4Psych/ds4p_package")
 ```
 
 ## Citation
@@ -47,15 +47,15 @@ devtools::install_github("DataScience4Psych/package")
 If you use DS4P in your research or wish to refer to it, please cite the following paper:
 
 ```
-citation(package = "DS4P")
+citation(package = "ds4p_package")
 ```
 ```{r,comment='',results='asis',echo=FALSE} 
-print(citation(package = "DS4P"), style = "text", bibtex = FALSE)
+print(citation(package = "ds4p_package"), style = "text", bibtex = FALSE)
 ```
 
 A BibTeX entry for LaTeX users is
 ```{r,comment='',echo=FALSE}
-toBibtex(citation(package = "DS4P"))
+toBibtex(citation(package = "ds4p_package"))
 ```
 
 ## Contributing

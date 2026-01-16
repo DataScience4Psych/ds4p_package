@@ -129,8 +129,6 @@ advdate <- function(weekonemonday,
       }
     )
 
-
-
     if (!inherits(weekonemonday, "Date") && (!is.character(weekonemonday) || !grepl("^\\d{4}-\\d{2}-\\d{2}$", weekonemonday))) {
       stop("weekonemonday must be a Date object or a character string in 'YYYY-MM-DD' format.")
     }

@@ -1,4 +1,4 @@
-Package: DS4P
+Package: datascience4psych
 Type: Package
 Title: Data Science for Psychologists
 Version: 0.1.0
@@ -10,7 +10,7 @@ Description: This package provides a set of functions for working with
     the DS4P course at Wake Forest University.
 License: GPL-3 + file LICENSE
 Encoding: UTF-8
-BugReports: https://github.com/DataScience4Psych/package/issues
+BugReports: https://github.com/DataScience4Psych/ds4p_package/issues
 LazyData: true
 RoxygenNote: 7.3.2
 Imports: 
