@@ -4,7 +4,7 @@
 \alias{install_if_missing}
 \title{Conditionally Install Packages}
 \usage{
-install_if_missing(package, host = "CRAN")
+install_if_missing(package, host = "CRAN", repo = NULL)
 }
 \arguments{
 \item{package}{The name of the package to check and install.}

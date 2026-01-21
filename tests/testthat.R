@@ -7,6 +7,5 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(DS4P)
 
-test_check("DS4P")
+test_check("datascience4psych")

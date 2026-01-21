@@ -113,9 +113,14 @@ pretty_install <- function(...) {
 #' @param host The host from which to install the package. Options are "CRAN", "GitHub", "R-Forge", or "Bioconductor".
 #' @param repo The GitHub repository in the format "username/repo" (for GitHub installations).
 
-install_if_missing <- function(package, host = "CRAN") {
+install_if_missing <- function(package, host = "CRAN", repo = NULL) {
   if (host == "GitHub") {
-    install_github_if_missing(repo = package)
+    if (is.null(repo)) {
+      install_github_if_missing(repo = package)
+    } else {
+      install_github_if_missing(repo = repo)
+    }
+
   } else if (host == "R-Forge") {
     install_rforge_if_missing(package = package)
   } else if (host == "Bioconductor") {
@@ -123,11 +128,11 @@ install_if_missing <- function(package, host = "CRAN") {
   } else if (host == "CRAN") {
     if (!require(package, character.only = TRUE)) {
       # Check if the package is available on CRAN
-      if (!package %in% rownames(available.packages())) {
+      if (!package %in% rownames(utils::available.packages())) {
         stop(paste("Package", package, "is not available on CRAN."))
       }
       # Install the package from CRAN
-      install.packages(package)
+      utils::install.packages(package)
     }
   } else {
     stop("Invalid host specified. Use 'CRAN', 'GitHub', 'R-Forge', or 'Bioconductor'.")
@@ -160,9 +165,10 @@ install_github_if_missing <- function(repo) {
 #' @param repo The R-Forge repository URL. Default is "http://R-Forge.R-project.org".
 #' @return NULL
 
-install_rforge_if_missing <- function(package, repo = "http://R-Forge.R-project.org") {
+install_rforge_if_missing <- function(package,
+                                      repo = "http://R-Forge.R-project.org") {
   if (!require(package, character.only = TRUE)) {
-    install.packages(package, repos = repo)
+    utils::install.packages(package, repos = repo)
   }
 }
 
