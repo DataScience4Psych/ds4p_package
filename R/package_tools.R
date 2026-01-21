@@ -148,6 +148,8 @@ install_github_if_missing <- function(repo) {
   package <- unlist(strsplit(repo, "/"))[2]
   if (!require(package, character.only = TRUE)) {
     devtools::install_github(repo)
+  } else {
+    message(paste("Package", package, "is already installed."))
   }
 }
 #' Install R-Forge Package if Missing

@@ -28,6 +28,9 @@ slide_url <- function(df_url, title, slide = NULL) {
 #' }
 #' @export
 try_include_tweet <- function(tweet_url, plain = FALSE, ...) {
+  if (!requireNamespace("tweetrmd", quietly = TRUE)) {
+    stop("Package 'tweetrmd' is required for try_include_tweet(). Install it first.")
+  }
   return(try(tweetrmd::include_tweet(tweet_url = tweet_url, plain = plain),
     silent = TRUE
   ))
