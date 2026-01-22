@@ -83,7 +83,6 @@ test_that("advdate handles alternate unit labels", {
 })
 
 
-
 # test_that("advdate handles version 0 correctly", {
 #  result <- advdate("2023-01-09", 1, version = 0)
 #  expect_equal(result, "Module 01, 01/09 - 01/13")

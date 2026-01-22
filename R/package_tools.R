@@ -120,7 +120,6 @@ install_if_missing <- function(package, host = "CRAN", repo = NULL) {
     } else {
       install_github_if_missing(repo = repo)
     }
-
   } else if (host == "R-Forge") {
     install_rforge_if_missing(package = package)
   } else if (host == "Bioconductor") {
@@ -138,7 +137,6 @@ install_if_missing <- function(package, host = "CRAN", repo = NULL) {
     stop("Invalid host specified. Use 'CRAN', 'GitHub', 'R-Forge', or 'Bioconductor'.")
   }
 }
-
 
 
 #' Install GitHub Package if Missing

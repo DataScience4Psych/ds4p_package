@@ -25,8 +25,7 @@ names(titanic_test) <- names(titanic_test) %>% tolower()
 # Check for overlapping names between datasets
 df_ship %>%
   filter(tolower(name) %in% tolower(titanic_train$name) &
-    tolower(name) %in% tolower(titanic_test$name)
-  ) %>%
+    tolower(name) %in% tolower(titanic_test$name)) %>%
   select(name)
 
 # Create a variable to identify which dataset each row belongs to
@@ -40,9 +39,11 @@ df <- df_ship %>%
         tolower(ticket) %in% tolower(titanic_train$ticket) ~ 0,
       str_remove_all(tolower(name), trimms) %in% str_remove_all(tolower(titanic_test$name), trimms) &
         tolower(ticket) %in% tolower(titanic_test$ticket) ~ 1,
-      TRUE ~ NA_real_)
+      TRUE ~ NA_real_
+    )
   )
 summary(df$test)
+
 sum(df$test == 0, na.rm = TRUE) # 891
 sum(df$test == 1, na.rm = TRUE) # 418
 

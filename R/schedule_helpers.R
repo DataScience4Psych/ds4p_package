@@ -117,7 +117,7 @@ advdate <- function(weekonemonday,
       assignment = assignment,
       unit = unit
     ))
-  } else  if (legacy == FALSE) {
+  } else if (legacy == FALSE) {
     # Validate inputs
     tryCatch(
       {
